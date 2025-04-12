@@ -1,9 +1,11 @@
 import * as path from "path";
 import { defineConfig, type UserConfig } from "vite";
 
+const REPO_NAME = "MWICombatSimulator";
+
 export default defineConfig(
-  (): UserConfig => ({
-    base: "/",
+  ({ isPreview, command }): UserConfig => ({
+    base: isPreview || command === "build" ? `/${REPO_NAME}/` : "/",
     resolve: {
       mainFields: ["browser", "module", "main"],
       alias: [{ find: "$", replacement: path.resolve(__dirname, "src") }],
